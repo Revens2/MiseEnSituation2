@@ -8,87 +8,62 @@ using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Collections.Generic;
 using System.Reflection;
-
-bool quitter = false;
-
-
-while (!quitter)
+public  struct Client
 {
-    Console.WriteLine("Veuillez saisir un nombre pour naviguer : ");
-    Console.WriteLine("1 : Saisir un nouveau client");
-    Console.WriteLine("2 : Afficher un client par nom");
-    Console.WriteLine("3 : Afficher tous les clients");
-    Console.WriteLine("4 : Afficher le nombre de clients");
-    Console.WriteLine("5 : Modifier une fiche par numéro");
-    Console.WriteLine("6 : Supprimer une fiche");
-    Console.WriteLine("7 : Récupérer une fiche supprimée par erreur");
-    Console.WriteLine("8 : Lister uniquement les fiches supprimées logiquement");
-    Console.WriteLine("9 : Compresser le fichier");
-    Console.WriteLine("10 : Quitter");
+    public int Id { get; set; }
+    public string nom { get; set; }
+    public string prenom { get; set; }
+    public string num { get; set; }
+}
+public static class Program
+{
 
-
-
-    int numbernav;
-    if (int.TryParse(Console.ReadLine(), out numbernav))
-    {
-        Console.Clear();
-        switch (numbernav)
+    static bool quitter = false;
+    static var menuActions = new List<(string titre, string methodName)>
         {
-            case 1:
-                Console.WriteLine("Saisir un nouveau client");
-                SaisirNouveauClient();
-                break;
-            case 2:
-                Console.WriteLine("Afficher un client par nom");
-                RechercheClient();
-                break;
-            case 3:
-                Console.WriteLine("Afficher tous les clients");
-                RecherchetousClient();
-                break;
-            case 4:
-                Console.WriteLine("Afficher le nombre de clients");
-                NombreClient();
-                break;
-            case 5:
-                Console.WriteLine("Modifier un client");
-                EditClient();
-                break;
-            case 6:
-                Console.WriteLine("Supprimer une fiche");
-                DeleteClient();
-                break;
-            case 7:
-                Console.WriteLine("Récupérer une fiche supprimée par erreur");
-                RecupererClient();
-                break;
-            case 8:
-                Console.WriteLine("Lister uniquement les fiches supprimées logiquement");
-                RechercheClientSupprimé();
-                break;
-            case 9:
-                Console.WriteLine("Compresser le fichier");
-                CompresseFile();
-                break;
-            case 10:
-                quitter = true;
-                break;
-            default:
-                Console.WriteLine("Choix invalide veuillez réessayer");
-                Console.ReadKey();
-                break;
+            ("Saisir un nouveau client", "SaisirNouveauClient"),
+            ("Afficher un client par nom", "RechercheClient"),
+            ("Afficher tous les clients", "RecherchetousClient"),
+            ("Afficher le nombre de clients", "NombreClient"),
+            ("Modifier une fiche par numéro", "EditClient"),
+            ("Supprimer une fiche", "DeleteClient"),
+            ("Récupérer une fiche supprimée par erreur", "RecupererClient"),
+            ("Lister uniquement les fiches supprimées logiquement", "RechercheClientSupprimé"),
+            ("Compresser le fichier", "CompresseFile"),
+            ("Quitter", "QUITTER_ACTION")
+        };
+    public static void Main()
+    {
+
+        while (!quitter)
+        {
+            Console.WriteLine("Veuillez saisir un nombre pour naviguer : ");
+
+            for (int i = 0; i < menuActions.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {menuActions[i].titre}");
+
+            }
+
+
+
+            int numbernav;
+            if (int.TryParse(Console.ReadLine(), out numbernav))
+            {
+                Console.Clear();
+            }
+            else
+            {
+                Console.WriteLine("veuillez saisir un nombre");
+            }
+            Console.Clear();
         }
     }
-    else
-    {
-        Console.WriteLine("veuillez saisir un nombre");
-    }
-    Console.Clear();
-
     static void SaisirNouveauClient()
     {
         int id = 0;
         int idsupp = 0;
+        var c = new Client();
         bool clientsupp = false;
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
@@ -97,15 +72,15 @@ while (!quitter)
         {
             while (fs.Position < fs.Length)
             {
-                int idd = reader.ReadInt32();
-                string nom = reader.ReadString();
-                string prenom = reader.ReadString();
-                string num = reader.ReadString();
+                c.Id = reader.ReadInt32();
+                c.nom = reader.ReadString();
+                c.prenom = reader.ReadString();
+                c.num = reader.ReadString();
                 id++;
-                if (nom.StartsWith("*"))
+                if (c.nom.StartsWith("*"))
                 {
                     clientsupp = true;
-                    idsupp = idd;
+                    idsupp = c.Id;
 
                 }
 
@@ -197,6 +172,7 @@ while (!quitter)
         }
 
     }
+
     static void RechercheClient()
     {
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
@@ -671,20 +647,21 @@ while (!quitter)
     }
 
 
-}
 
 
-static string Majuscule(string nom)
-{
-    nom = nom.ToUpper();
-    return nom;
 
-}
-static string FirstMajuscule(string prenom)
-{
-    prenom = prenom.ToLower();
-    prenom = char.ToUpper(prenom[0]) + prenom.Substring(1);
-    return prenom;
+    static string Majuscule(string nom)
+    {
+        nom = nom.ToUpper();
+        return nom;
+
+    }
+    static string FirstMajuscule(string prenom)
+    {
+        prenom = prenom.ToLower();
+        prenom = char.ToUpper(prenom[0]) + prenom.Substring(1);
+        return prenom;
+    }
 }
 
 
