@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using System;
+﻿using System;
 using System.IO;
 using System.Net.NetworkInformation;
 using System.Net.Security;
@@ -8,56 +7,48 @@ using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Collections.Generic;
 using System.Reflection;
-public  struct Client
+public struct Client
 {
     public int Id { get; set; }
     public string nom { get; set; }
     public string prenom { get; set; }
     public string num { get; set; }
 }
-public  class Program
+public class Program
 {
-    public void Methode1(string Valeur)
-    {
-        Console.WriteLine($"Méthode 1 : {Valeur}");
-    }
-
-    public void Methode2()
-    {
-        Console.WriteLine($"Méthode 2");
-    }
-
-    public void Methode3()
-    {
-    }
-    static void SaisirNouveauClient()
+    Client c = new Client();
+    public void SaisirNouveauClient()
     {
         int id = 0;
         int idsupp = 0;
-        var c = new Client();
+
         bool clientsupp = false;
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
-        using (FileStream fs = new FileStream(chemindufichier, FileMode.Open, FileAccess.Read))
-        using (BinaryReader reader = new BinaryReader(fs))
+        FileInfo fi = new FileInfo(chemindufichier);
+        if (fi.Length > 2)
         {
-            while (fs.Position < fs.Length)
+            using (FileStream fs = new FileStream(chemindufichier, FileMode.Open, FileAccess.Read))
+            using (BinaryReader reader = new BinaryReader(fs))
             {
-                c.Id = reader.ReadInt32();
-                c.nom = reader.ReadString();
-                c.prenom = reader.ReadString();
-                c.num = reader.ReadString();
-                id++;
-                if (c.nom.StartsWith("*"))
+
+                while (fs.Position < fs.Length)
                 {
-                    clientsupp = true;
-                    idsupp = c.Id;
+                    c.Id = reader.ReadInt32();
+                    c.nom = reader.ReadString();
+                    c.prenom = reader.ReadString();
+                    c.num = reader.ReadString();
+                    id++;
+                    if (c.nom.StartsWith("*"))
+                    {
+                        clientsupp = true;
+                        idsupp = c.Id;
+
+                    }
 
                 }
-
             }
         }
-
         if (clientsupp)
         {
             string chemindufichiertemporaire = Path.Combine(repertoireprojet, "clientstempo.dat");
@@ -146,9 +137,9 @@ public  class Program
 
     }
 
-    static void RechercheClient()
+    public void RechercheClient()
     {
-        var c = new Client();
+
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
         FileInfo fi = new FileInfo(chemindufichier);
@@ -192,9 +183,9 @@ public  class Program
         Console.Read();
 
     }
-    static void RecherchetousClient()
+    public void RecherchetousClient()
     {
-        var c = new Client();
+
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
         FileInfo fi = new FileInfo(chemindufichier);
@@ -223,9 +214,9 @@ public  class Program
         Console.Read();
 
     }
-    static void NombreClient()
+    public void NombreClient()
     {
-        var c = new Client();
+
         int numberclient = 0;
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
@@ -260,9 +251,9 @@ public  class Program
     }
 
 
-    static void EditClient()
+    public void EditClient()
     {
-        var c = new Client();
+
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
         string chemindufichiertemporaire = Path.Combine(repertoireprojet, "clientstempo.dat");
@@ -365,9 +356,9 @@ public  class Program
 
     }
 
-    static void DeleteClient()
+    public void DeleteClient()
     {
-        var c = new Client();
+
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
         string chemindufichiertemporaire = Path.Combine(repertoireprojet, "clientstempo.dat");
@@ -460,9 +451,9 @@ public  class Program
 
     }
 
-    static void RecupererClient()
+    public void RecupererClient()
     {
-        var c = new Client();
+
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
         string chemindufichiertemporaire = Path.Combine(repertoireprojet, "clientstempo.dat");
@@ -477,6 +468,7 @@ public  class Program
 
         Console.Write("nom du client a recuperer : ");
         string cible = "*" + Console.ReadLine();
+        cible = cible.ToUpper();
         bool found = false;
 
 
@@ -547,9 +539,9 @@ public  class Program
         }
 
     }
-    static void RechercheClientSupprimé()
+    public void RechercheClientSupprimé()
     {
-        var c = new Client();
+
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
         FileInfo fi = new FileInfo(chemindufichier);
@@ -579,9 +571,9 @@ public  class Program
 
     }
 
-    static void CompresseFile()
+    public void CompresseFile()
     {
-        var c = new Client();
+
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
         string chemindufichiertemporaire = Path.Combine(repertoireprojet, "clientstempo.dat");
@@ -630,55 +622,48 @@ public  class Program
 
     }
 
-
-
-
-
-    static void Majuscule()
+    public void Majuscule()
     {
-        var c = new Client();
         c.nom = c.nom.ToUpper();
 
     }
-    static void FirstMajuscule()
+    public void FirstMajuscule()
     {
-        var c = new Client();
+
         c.prenom = c.prenom.ToLower();
         c.prenom = char.ToUpper(c.prenom[0]) + c.prenom.Substring(1);
     }
 
-  public static void Main()
+    public static void Main()
     {
-         bool quitter = false;
+        bool quitter = false;
         List<string> LesMethodes = new List<string> { "SaisirNouveauClient", "RechercheClient", "RecherchetousClient", "NombreClient", "EditClient", "DeleteClient", "RecupererClient", "RechercheClientSupprimé", "CompresseFile", "QUITTER_ACTION" };
-        Client myclient = new Client();
+        Program monprog = new Program();
         while (!quitter)
         {
             int num = 0;
             foreach (string name in LesMethodes)
             {
-                Console.WriteLine($"{num +1}. {name}");
+                Console.WriteLine($"{num + 1}. {name}");
                 num++;
             }
             Console.WriteLine("Veuillez saisir un nombre pour naviguer : ");
-            int Num = int.Parse(Console.ReadLine());
-            MethodInfo methodInfo = myclient.GetType().GetMethod(LesMethodes[Num - 1]);
-
-
-
-            int numbernav;
-            if (int.TryParse(Console.ReadLine(), out numbernav))
+            int Num;
+            if (int.TryParse(Console.ReadLine(), out Num))
             {
                 Console.Clear();
-            }
-            else
-            {
-                Console.WriteLine("veuillez saisir un nombre");
+                MethodInfo methodInfo = monprog.GetType().GetMethod(LesMethodes[Num - 1]);
+                if (Num == 10)
+                {
+                    quitter = true;
+                    return;
+                }
+                methodInfo.Invoke(monprog, null);
             }
             Console.Clear();
         }
     }
-   
+
 }
 
 
