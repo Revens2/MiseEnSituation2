@@ -15,49 +15,20 @@ public  struct Client
     public string prenom { get; set; }
     public string num { get; set; }
 }
-public static class Program
+public  class Program
 {
-
-    static bool quitter = false;
-    static var menuActions = new List<(string titre, string methodName)>
-        {
-            ("Saisir un nouveau client", "SaisirNouveauClient"),
-            ("Afficher un client par nom", "RechercheClient"),
-            ("Afficher tous les clients", "RecherchetousClient"),
-            ("Afficher le nombre de clients", "NombreClient"),
-            ("Modifier une fiche par numéro", "EditClient"),
-            ("Supprimer une fiche", "DeleteClient"),
-            ("Récupérer une fiche supprimée par erreur", "RecupererClient"),
-            ("Lister uniquement les fiches supprimées logiquement", "RechercheClientSupprimé"),
-            ("Compresser le fichier", "CompresseFile"),
-            ("Quitter", "QUITTER_ACTION")
-        };
-    public static void Main()
+    public void Methode1(string Valeur)
     {
+        Console.WriteLine($"Méthode 1 : {Valeur}");
+    }
 
-        while (!quitter)
-        {
-            Console.WriteLine("Veuillez saisir un nombre pour naviguer : ");
+    public void Methode2()
+    {
+        Console.WriteLine($"Méthode 2");
+    }
 
-            for (int i = 0; i < menuActions.Count; i++)
-            {
-                Console.WriteLine($"{i + 1}. {menuActions[i].titre}");
-
-            }
-
-
-
-            int numbernav;
-            if (int.TryParse(Console.ReadLine(), out numbernav))
-            {
-                Console.Clear();
-            }
-            else
-            {
-                Console.WriteLine("veuillez saisir un nombre");
-            }
-            Console.Clear();
-        }
+    public void Methode3()
+    {
     }
     static void SaisirNouveauClient()
     {
@@ -92,9 +63,6 @@ public static class Program
             string chemindufichiertemporaire = Path.Combine(repertoireprojet, "clientstempo.dat");
 
 
-            int idd = 0;
-
-
 
             using (FileStream fs = new FileStream(chemindufichier, FileMode.Open, FileAccess.Read, FileShare.Read))
             using (FileStream fsmodifier = new FileStream(chemindufichiertemporaire, FileMode.Create, FileAccess.Write, FileShare.None))
@@ -103,30 +71,32 @@ public static class Program
             {
                 while (fs.Position < fs.Length)
                 {
-                    idd = reader.ReadInt32();
-                    string nom = reader.ReadString();
-                    string prenom = reader.ReadString();
-                    string num = reader.ReadString();
-                    if (nom.StartsWith("*"))
+                    c.Id = reader.ReadInt32();
+                    c.nom = reader.ReadString();
+                    c.prenom = reader.ReadString();
+                    c.num = reader.ReadString();
+                    if (c.nom.StartsWith("*"))
                     {
-                        if (idsupp == idd)
+                        if (idsupp == c.Id)
                         {
                             Console.WriteLine("Veuillez saisir le nom du client : ");
-                            nom = Console.ReadLine();
+                            c.nom = Console.ReadLine();
 
                             Console.WriteLine("Veuillez saisir le prenom du client : ");
-                            prenom = Console.ReadLine();
+                            c.prenom = Console.ReadLine();
 
                             Console.WriteLine("Veuillez saisir le prenom du client : ");
-                            num = Console.ReadLine();
+                            c.num = Console.ReadLine();
 
 
                         }
                     }
-                    WriterBin.Write(idd);
-                    WriterBin.Write(Majuscule(nom));
-                    WriterBin.Write(FirstMajuscule(prenom));
-                    WriterBin.Write(num);
+                    WriterBin.Write(c.Id);
+                    Majuscule();
+                    WriterBin.Write(c.nom);
+                    FirstMajuscule();
+                    WriterBin.Write(c.prenom);
+                    WriterBin.Write(c.num);
 
                 }
             }
@@ -156,16 +126,19 @@ public static class Program
                     {
                         WriterBin.Write(id + 1);
                         Console.WriteLine("Veuillez saisir le nom du client : ");
-                        string nom = Console.ReadLine();
-                        WriterBin.Write(Majuscule(nom));
+                        c.nom = Console.ReadLine();
+                        Majuscule();
+                        WriterBin.Write(c.nom);
+
 
                         Console.WriteLine("Veuillez saisir le prenom du client : ");
-                        string prenom = Console.ReadLine();
-                        WriterBin.Write(FirstMajuscule(prenom));
+                        c.prenom = Console.ReadLine();
+                        FirstMajuscule();
+                        WriterBin.Write(c.prenom);
 
                         Console.WriteLine("Veuillez saisir le prenom du client : ");
-                        string num = Console.ReadLine();
-                        WriterBin.Write(num);
+                        c.num = Console.ReadLine();
+                        WriterBin.Write(c.num);
                     }
                 }
             }
@@ -175,6 +148,7 @@ public static class Program
 
     static void RechercheClient()
     {
+        var c = new Client();
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
         FileInfo fi = new FileInfo(chemindufichier);
@@ -187,7 +161,7 @@ public static class Program
 
         Console.Write("Nom a rechercher : ");
         string cible = Console.ReadLine();
-        cible = Majuscule(cible);
+        cible = cible.ToUpper();
 
         bool found = false;
         using (FileStream fs = new FileStream(chemindufichier, FileMode.Open, FileAccess.Read))
@@ -195,16 +169,16 @@ public static class Program
         {
             while (fs.Position < fs.Length)
             {
-                int idd = reader.ReadInt32();
-                string nom = reader.ReadString();
-                string prenom = reader.ReadString();
-                string num = reader.ReadString();
+                c.Id = reader.ReadInt32();
+                c.nom = reader.ReadString();
+                c.prenom = reader.ReadString();
+                c.num = reader.ReadString();
 
-                if (string.Equals(nom, cible, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(c.nom, cible, StringComparison.OrdinalIgnoreCase))
                 {
-                    if (!nom.StartsWith("*"))
+                    if (!c.nom.StartsWith("*"))
                     {
-                        Console.WriteLine($"{nom} {prenom}");
+                        Console.WriteLine($"{c.nom} {c.prenom}");
                         found = true;
                     }
                 }
@@ -220,6 +194,7 @@ public static class Program
     }
     static void RecherchetousClient()
     {
+        var c = new Client();
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
         FileInfo fi = new FileInfo(chemindufichier);
@@ -234,13 +209,13 @@ public static class Program
         {
             while (fs.Position < fs.Length)
             {
-                int idd = reader.ReadInt32();
-                string nom = reader.ReadString();
-                string prenom = reader.ReadString();
-                string num = reader.ReadString();
-                if (!nom.StartsWith("*"))
+                c.Id = reader.ReadInt32();
+                c.nom = reader.ReadString();
+                c.prenom = reader.ReadString();
+                c.num = reader.ReadString();
+                if (!c.nom.StartsWith("*"))
                 {
-                    Console.WriteLine($"{idd} {nom} {prenom} {num}");
+                    Console.WriteLine($"{c.Id} {c.nom} {c.prenom} {c.num}");
                 }
             }
         }
@@ -250,6 +225,7 @@ public static class Program
     }
     static void NombreClient()
     {
+        var c = new Client();
         int numberclient = 0;
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
@@ -265,11 +241,11 @@ public static class Program
         {
             while (fs.Position < fs.Length)
             {
-                int idd = reader.ReadInt32();
-                string nom = reader.ReadString();
-                string prenom = reader.ReadString();
-                string num = reader.ReadString();
-                if (!nom.StartsWith("*"))
+                c.Id = reader.ReadInt32();
+                c.nom = reader.ReadString();
+                c.prenom = reader.ReadString();
+                c.num = reader.ReadString();
+                if (!c.nom.StartsWith("*"))
                 {
                     numberclient++;
                 }
@@ -286,7 +262,7 @@ public static class Program
 
     static void EditClient()
     {
-
+        var c = new Client();
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
         string chemindufichiertemporaire = Path.Combine(repertoireprojet, "clientstempo.dat");
@@ -300,7 +276,6 @@ public static class Program
 
         Console.Write("Numéro a rechercher : ");
         int cible = 0;
-        int idd = 0;
         bool found = false;
         if (int.TryParse(Console.ReadLine(), out cible))
         {
@@ -314,15 +289,15 @@ public static class Program
             {
                 while (fs.Position < fs.Length)
                 {
-                    idd = reader.ReadInt32();
-                    string nom = reader.ReadString();
-                    string prenom = reader.ReadString();
-                    string num = reader.ReadString();
-                    if (!nom.StartsWith("*"))
+                    c.Id = reader.ReadInt32();
+                    c.nom = reader.ReadString();
+                    c.prenom = reader.ReadString();
+                    c.num = reader.ReadString();
+                    if (!c.nom.StartsWith("*"))
                     {
-                        if (cible == idd)
+                        if (cible == c.Id)
                         {
-                            Console.WriteLine($"Le client concerné est : [{idd}] {nom} {prenom} {num}");
+                            Console.WriteLine($"Le client concerné est : [{c.Id}] {c.nom} {c.prenom} {c.num}");
                             found = true;
                             Console.WriteLine("Que souhaitez vous modifier ? 1: Le nom 2: Le prenom 3: Le numero");
 
@@ -334,16 +309,16 @@ public static class Program
                                 {
                                     case 1:
                                         Console.WriteLine("Saisir un nouveau nom du client :");
-                                        nom = Console.ReadLine();
+                                        c.nom = Console.ReadLine();
                                         break;
                                     case 2:
                                         Console.WriteLine("Saisir un nouveau prenom du client client");
-                                        prenom = Console.ReadLine();
+                                        c.prenom = Console.ReadLine();
 
                                         break;
                                     case 3:
                                         Console.WriteLine("Saisir un nouveau numero du client client");
-                                        num = Console.ReadLine();
+                                        c.num = Console.ReadLine();
                                         break;
 
                                 }
@@ -352,10 +327,13 @@ public static class Program
 
                         }
                     }
-                    WriterBin.Write(idd);
-                    WriterBin.Write(Majuscule(nom));
-                    WriterBin.Write(FirstMajuscule(prenom));
-                    WriterBin.Write(num);
+                    WriterBin.Write(c.Id);
+                    Majuscule();
+                    WriterBin.Write(c.nom);
+                    FirstMajuscule();
+                    WriterBin.Write(c.prenom);
+                    WriterBin.Write(c.num);
+
 
                 }
                 if (!found)
@@ -389,6 +367,7 @@ public static class Program
 
     static void DeleteClient()
     {
+        var c = new Client();
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
         string chemindufichiertemporaire = Path.Combine(repertoireprojet, "clientstempo.dat");
@@ -403,7 +382,6 @@ public static class Program
 
         Console.Write("Numéro a rechercher : ");
         int cible = 0;
-        int idd = 0;
 
         if (int.TryParse(Console.ReadLine(), out cible))
         {
@@ -417,15 +395,15 @@ public static class Program
             {
                 while (fs.Position < fs.Length)
                 {
-                    idd = reader.ReadInt32();
-                    string nom = reader.ReadString();
-                    string prenom = reader.ReadString();
-                    string num = reader.ReadString();
-                    if (!nom.StartsWith("*"))
+                    c.Id = reader.ReadInt32();
+                    c.nom = reader.ReadString();
+                    c.prenom = reader.ReadString();
+                    c.num = reader.ReadString();
+                    if (!c.nom.StartsWith("*"))
                     {
-                        if (cible == idd)
+                        if (cible == c.Id)
                         {
-                            Console.WriteLine($"Le client que vous allez supprimer est : [{idd}] {nom} {prenom}");
+                            Console.WriteLine($"Le client que vous allez supprimer est : [{c.Id}] {c.nom} {c.prenom}");
 
                             Console.WriteLine("Confirmez la suppresion ? 1: oui 2: Non");
 
@@ -436,7 +414,7 @@ public static class Program
                                 switch (numberchoix)
                                 {
                                     case 1:
-                                        nom = "*" + nom;
+                                        c.nom = "*" + c.nom;
                                         found = true;
                                         break;
                                     case 2:
@@ -448,10 +426,13 @@ public static class Program
                         }
 
                     }
-                    WriterBin.Write(idd);
-                    WriterBin.Write(nom);
-                    WriterBin.Write(prenom);
-                    WriterBin.Write(num);
+                    WriterBin.Write(c.Id);
+                    Majuscule();
+                    WriterBin.Write(c.nom);
+                    FirstMajuscule();
+                    WriterBin.Write(c.prenom);
+                    WriterBin.Write(c.num);
+
                 }
                 if (!found)
                 {
@@ -481,6 +462,7 @@ public static class Program
 
     static void RecupererClient()
     {
+        var c = new Client();
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
         string chemindufichiertemporaire = Path.Combine(repertoireprojet, "clientstempo.dat");
@@ -495,7 +477,6 @@ public static class Program
 
         Console.Write("nom du client a recuperer : ");
         string cible = "*" + Console.ReadLine();
-        int idd = 0;
         bool found = false;
 
 
@@ -506,16 +487,16 @@ public static class Program
         {
             while (fs.Position < fs.Length)
             {
-                idd = reader.ReadInt32();
-                string nom = reader.ReadString();
-                string prenom = reader.ReadString();
-                string num = reader.ReadString();
-                if (nom.StartsWith("*"))
+                c.Id = reader.ReadInt32();
+                c.nom = reader.ReadString();
+                c.prenom = reader.ReadString();
+                c.num = reader.ReadString();
+                if (c.nom.StartsWith("*"))
                 {
 
-                    if (cible == nom)
+                    if (cible == c.nom)
                     {
-                        Console.WriteLine($"Le client que vous allez recuperer est : [{idd}] {nom} {prenom}");
+                        Console.WriteLine($"Le client que vous allez recuperer est : [{c.Id}] {c.nom} {c.prenom}");
 
                         Console.WriteLine("Confirmez la recuperation ? 1: oui 2: Non");
 
@@ -526,7 +507,7 @@ public static class Program
                             switch (numberchoix)
                             {
                                 case 1:
-                                    nom = nom.TrimStart('*');
+                                    c.nom = c.nom.TrimStart('*');
                                     found = true;
                                     break;
                                 case 2:
@@ -540,10 +521,13 @@ public static class Program
 
                     }
                 }
-                WriterBin.Write(idd);
-                WriterBin.Write(nom);
-                WriterBin.Write(prenom);
-                WriterBin.Write(num);
+                WriterBin.Write(c.Id);
+                Majuscule();
+                WriterBin.Write(c.nom);
+                FirstMajuscule();
+                WriterBin.Write(c.prenom);
+                WriterBin.Write(c.num);
+
             }
             if (!found)
             {
@@ -562,14 +546,10 @@ public static class Program
             }
         }
 
-
-
-
-
-
     }
     static void RechercheClientSupprimé()
     {
+        var c = new Client();
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
         FileInfo fi = new FileInfo(chemindufichier);
@@ -584,13 +564,13 @@ public static class Program
         {
             while (fs.Position < fs.Length)
             {
-                int idd = reader.ReadInt32();
-                string nom = reader.ReadString();
-                string prenom = reader.ReadString();
-                string num = reader.ReadString();
-                if (nom.StartsWith("*"))
+                c.Id = reader.ReadInt32();
+                c.nom = reader.ReadString();
+                c.prenom = reader.ReadString();
+                c.num = reader.ReadString();
+                if (c.nom.StartsWith("*"))
                 {
-                    Console.WriteLine($"{idd} {nom} {prenom} {num}");
+                    Console.WriteLine($"{c.Id} {c.nom} {c.prenom} {c.num}");
                 }
             }
         }
@@ -601,6 +581,7 @@ public static class Program
 
     static void CompresseFile()
     {
+        var c = new Client();
         string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
         string chemindufichiertemporaire = Path.Combine(repertoireprojet, "clientstempo.dat");
@@ -618,16 +599,19 @@ public static class Program
         {
             while (fs.Position < fs.Length)
             {
-                int idd = reader.ReadInt32();
-                string nom = reader.ReadString();
-                string prenom = reader.ReadString();
-                string num = reader.ReadString();
-                if (!nom.StartsWith("*"))
+                c.Id = reader.ReadInt32();
+                c.nom = reader.ReadString();
+                c.prenom = reader.ReadString();
+                c.num = reader.ReadString();
+                if (!c.nom.StartsWith("*"))
                 {
-                    WriterBin.Write(idd);
-                    WriterBin.Write(nom);
-                    WriterBin.Write(prenom);
-                    WriterBin.Write(num);
+                    WriterBin.Write(c.Id);
+                    Majuscule();
+                    WriterBin.Write(c.nom);
+                    FirstMajuscule();
+                    WriterBin.Write(c.prenom);
+                    WriterBin.Write(c.num);
+
 
                 }
             }
@@ -650,18 +634,51 @@ public static class Program
 
 
 
-    static string Majuscule(string nom)
+    static void Majuscule()
     {
-        nom = nom.ToUpper();
-        return nom;
+        var c = new Client();
+        c.nom = c.nom.ToUpper();
 
     }
-    static string FirstMajuscule(string prenom)
+    static void FirstMajuscule()
     {
-        prenom = prenom.ToLower();
-        prenom = char.ToUpper(prenom[0]) + prenom.Substring(1);
-        return prenom;
+        var c = new Client();
+        c.prenom = c.prenom.ToLower();
+        c.prenom = char.ToUpper(c.prenom[0]) + c.prenom.Substring(1);
     }
+
+  public static void Main()
+    {
+         bool quitter = false;
+        List<string> LesMethodes = new List<string> { "SaisirNouveauClient", "RechercheClient", "RecherchetousClient", "NombreClient", "EditClient", "DeleteClient", "RecupererClient", "RechercheClientSupprimé", "CompresseFile", "QUITTER_ACTION" };
+        Client myclient = new Client();
+        while (!quitter)
+        {
+            int num = 0;
+            foreach (string name in LesMethodes)
+            {
+                Console.WriteLine($"{num +1}. {name}");
+                num++;
+            }
+            Console.WriteLine("Veuillez saisir un nombre pour naviguer : ");
+            int Num = int.Parse(Console.ReadLine());
+            MethodInfo methodInfo = myclient.GetType().GetMethod(LesMethodes[Num - 1]);
+
+
+
+            int numbernav;
+            if (int.TryParse(Console.ReadLine(), out numbernav))
+            {
+                Console.Clear();
+            }
+            else
+            {
+                Console.WriteLine("veuillez saisir un nombre");
+            }
+            Console.Clear();
+        }
+    }
+   
 }
 
 
