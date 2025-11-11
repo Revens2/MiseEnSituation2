@@ -34,8 +34,8 @@
             btnbclient = new Button();
             bteditclient = new Button();
             btdeleteclient = new Button();
-            button1 = new Button();
-            button2 = new Button();
+            btdeletesupprimer = new Button();
+            btsearchdeleteclient = new Button();
             btcompresse = new Button();
             btexit = new Button();
             SuspendLayout();
@@ -71,6 +71,7 @@
             btsearchclient.TabIndex = 35;
             btsearchclient.Text = "Rechercher un client";
             btsearchclient.UseVisualStyleBackColor = false;
+            btsearchclient.Click += btsearchclient_Click;
             // 
             // btallsearch
             // 
@@ -87,6 +88,7 @@
             btallsearch.TabIndex = 36;
             btallsearch.Text = "Rechercher tous client";
             btallsearch.UseVisualStyleBackColor = false;
+            btallsearch.Click += btallsearch_Click;
             // 
             // btnbclient
             // 
@@ -103,6 +105,7 @@
             btnbclient.TabIndex = 37;
             btnbclient.Text = "Nombre de Client";
             btnbclient.UseVisualStyleBackColor = false;
+            btnbclient.Click += btnbclient_Click;
             // 
             // bteditclient
             // 
@@ -119,6 +122,7 @@
             bteditclient.TabIndex = 38;
             bteditclient.Text = "Modifier un client";
             bteditclient.UseVisualStyleBackColor = false;
+            bteditclient.Click += bteditclient_Click;
             // 
             // btdeleteclient
             // 
@@ -135,38 +139,41 @@
             btdeleteclient.TabIndex = 39;
             btdeleteclient.Text = "Supprimer un client";
             btdeleteclient.UseVisualStyleBackColor = false;
+            btdeleteclient.Click += btdeleteclient_Click;
             // 
-            // button1
+            // btdeletesupprimer
             // 
-            button1.BackColor = Color.FromArgb(70, 130, 180);
-            button1.Cursor = Cursors.Hand;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Arial", 14F, FontStyle.Bold);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(287, 173);
-            button1.Margin = new Padding(2);
-            button1.Name = "button1";
-            button1.Size = new Size(180, 66);
-            button1.TabIndex = 40;
-            button1.Text = "Supprimer un client";
-            button1.UseVisualStyleBackColor = false;
+            btdeletesupprimer.BackColor = Color.FromArgb(70, 130, 180);
+            btdeletesupprimer.Cursor = Cursors.Hand;
+            btdeletesupprimer.FlatAppearance.BorderSize = 0;
+            btdeletesupprimer.FlatStyle = FlatStyle.Flat;
+            btdeletesupprimer.Font = new Font("Arial", 14F, FontStyle.Bold);
+            btdeletesupprimer.ForeColor = Color.White;
+            btdeletesupprimer.Location = new Point(287, 173);
+            btdeletesupprimer.Margin = new Padding(2);
+            btdeletesupprimer.Name = "btdeletesupprimer";
+            btdeletesupprimer.Size = new Size(180, 66);
+            btdeletesupprimer.TabIndex = 40;
+            btdeletesupprimer.Text = "Supprimer un client";
+            btdeletesupprimer.UseVisualStyleBackColor = false;
+            btdeletesupprimer.Click += btdeletesupprimer_Click;
             // 
-            // button2
+            // btsearchdeleteclient
             // 
-            button2.BackColor = Color.FromArgb(70, 130, 180);
-            button2.Cursor = Cursors.Hand;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Arial", 12.2000008F, FontStyle.Bold);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(514, 173);
-            button2.Margin = new Padding(2);
-            button2.Name = "button2";
-            button2.Size = new Size(194, 66);
-            button2.TabIndex = 41;
-            button2.Text = "Afficher un client supprimer";
-            button2.UseVisualStyleBackColor = false;
+            btsearchdeleteclient.BackColor = Color.FromArgb(70, 130, 180);
+            btsearchdeleteclient.Cursor = Cursors.Hand;
+            btsearchdeleteclient.FlatAppearance.BorderSize = 0;
+            btsearchdeleteclient.FlatStyle = FlatStyle.Flat;
+            btsearchdeleteclient.Font = new Font("Arial", 12.2000008F, FontStyle.Bold);
+            btsearchdeleteclient.ForeColor = Color.White;
+            btsearchdeleteclient.Location = new Point(514, 173);
+            btsearchdeleteclient.Margin = new Padding(2);
+            btsearchdeleteclient.Name = "btsearchdeleteclient";
+            btsearchdeleteclient.Size = new Size(194, 66);
+            btsearchdeleteclient.TabIndex = 41;
+            btsearchdeleteclient.Text = "Afficher un client supprimer";
+            btsearchdeleteclient.UseVisualStyleBackColor = false;
+            btsearchdeleteclient.Click += btsearchdeleteclient_Click;
             // 
             // btcompresse
             // 
@@ -183,6 +190,7 @@
             btcompresse.TabIndex = 42;
             btcompresse.Text = "Compresser le fichier";
             btcompresse.UseVisualStyleBackColor = false;
+            btcompresse.Click += btcompresse_Click;
             // 
             // btexit
             // 
@@ -199,6 +207,7 @@
             btexit.TabIndex = 43;
             btexit.Text = "Quitter l'application";
             btexit.UseVisualStyleBackColor = false;
+            btexit.Click += btexit_Click;
             // 
             // InterfaceClient
             // 
@@ -207,8 +216,8 @@
             ClientSize = new Size(1275, 641);
             Controls.Add(btexit);
             Controls.Add(btcompresse);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btsearchdeleteclient);
+            Controls.Add(btdeletesupprimer);
             Controls.Add(btdeleteclient);
             Controls.Add(bteditclient);
             Controls.Add(btnbclient);
@@ -217,7 +226,6 @@
             Controls.Add(btaddclient);
             Name = "InterfaceClient";
             Text = "Form1";
-            Load += this.InterfaceClient_Load;
             ResumeLayout(false);
         }
 
@@ -229,8 +237,8 @@
         private Button btnbclient;
         private Button bteditclient;
         private Button btdeleteclient;
-        private Button button1;
-        private Button button2;
+        private Button btdeletesupprimer;
+        private Button btsearchdeleteclient;
         private Button btcompresse;
         private Button btexit;
     }

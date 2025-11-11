@@ -11,7 +11,11 @@ namespace Mise_en_Situation_Graphique
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new InterfaceClient());
+
+            InterfaceClient mainForm = new InterfaceClient();
+            mainForm.FormClosed += (s, e) => Application.Exit();
+
+            Application.Run(mainForm);
         }
     }
 }
