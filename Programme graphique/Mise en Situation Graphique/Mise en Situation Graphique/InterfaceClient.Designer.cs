@@ -51,7 +51,7 @@
             btaddclient.Location = new Point(47, 43);
             btaddclient.Margin = new Padding(2);
             btaddclient.Name = "btaddclient";
-            btaddclient.Size = new Size(158, 50);
+            btaddclient.Size = new Size(158, 57);
             btaddclient.TabIndex = 34;
             btaddclient.Text = "Ajouter un client";
             btaddclient.UseVisualStyleBackColor = false;
@@ -68,7 +68,7 @@
             btsearchclient.Location = new Point(251, 43);
             btsearchclient.Margin = new Padding(2);
             btsearchclient.Name = "btsearchclient";
-            btsearchclient.Size = new Size(157, 50);
+            btsearchclient.Size = new Size(157, 57);
             btsearchclient.TabIndex = 35;
             btsearchclient.Text = "Rechercher un client";
             btsearchclient.UseVisualStyleBackColor = false;
@@ -85,7 +85,7 @@
             btallsearch.Location = new Point(450, 43);
             btallsearch.Margin = new Padding(2);
             btallsearch.Name = "btallsearch";
-            btallsearch.Size = new Size(157, 50);
+            btallsearch.Size = new Size(157, 57);
             btallsearch.TabIndex = 36;
             btallsearch.Text = "Rechercher tous client";
             btallsearch.UseVisualStyleBackColor = false;
@@ -102,7 +102,7 @@
             btnbclient.Location = new Point(644, 43);
             btnbclient.Margin = new Padding(2);
             btnbclient.Name = "btnbclient";
-            btnbclient.Size = new Size(157, 50);
+            btnbclient.Size = new Size(157, 57);
             btnbclient.TabIndex = 37;
             btnbclient.Text = "Nombre de Client";
             btnbclient.UseVisualStyleBackColor = false;
@@ -119,7 +119,7 @@
             bteditclient.Location = new Point(846, 43);
             bteditclient.Margin = new Padding(2);
             bteditclient.Name = "bteditclient";
-            bteditclient.Size = new Size(157, 50);
+            bteditclient.Size = new Size(157, 57);
             bteditclient.TabIndex = 38;
             bteditclient.Text = "Modifier un client";
             bteditclient.UseVisualStyleBackColor = false;
@@ -136,7 +136,7 @@
             btdeleteclient.Location = new Point(47, 130);
             btdeleteclient.Margin = new Padding(2);
             btdeleteclient.Name = "btdeleteclient";
-            btdeleteclient.Size = new Size(158, 50);
+            btdeleteclient.Size = new Size(158, 56);
             btdeleteclient.TabIndex = 39;
             btdeleteclient.Text = "Supprimer un client";
             btdeleteclient.UseVisualStyleBackColor = false;
@@ -153,7 +153,7 @@
             btdeletesupprimer.Location = new Point(251, 130);
             btdeletesupprimer.Margin = new Padding(2);
             btdeletesupprimer.Name = "btdeletesupprimer";
-            btdeletesupprimer.Size = new Size(158, 50);
+            btdeletesupprimer.Size = new Size(158, 56);
             btdeletesupprimer.TabIndex = 40;
             btdeletesupprimer.Text = "Supprimer un client";
             btdeletesupprimer.UseVisualStyleBackColor = false;
@@ -170,7 +170,7 @@
             btsearchdeleteclient.Location = new Point(450, 130);
             btsearchdeleteclient.Margin = new Padding(2);
             btsearchdeleteclient.Name = "btsearchdeleteclient";
-            btsearchdeleteclient.Size = new Size(170, 50);
+            btsearchdeleteclient.Size = new Size(170, 56);
             btsearchdeleteclient.TabIndex = 41;
             btsearchdeleteclient.Text = "Afficher un client supprimer";
             btsearchdeleteclient.UseVisualStyleBackColor = false;
@@ -187,7 +187,7 @@
             btcompresse.Location = new Point(644, 130);
             btcompresse.Margin = new Padding(2);
             btcompresse.Name = "btcompresse";
-            btcompresse.Size = new Size(158, 50);
+            btcompresse.Size = new Size(158, 56);
             btcompresse.TabIndex = 42;
             btcompresse.Text = "Compresser le fichier";
             btcompresse.UseVisualStyleBackColor = false;
@@ -204,7 +204,7 @@
             btexit.Location = new Point(846, 130);
             btexit.Margin = new Padding(2);
             btexit.Name = "btexit";
-            btexit.Size = new Size(158, 50);
+            btexit.Size = new Size(158, 56);
             btexit.TabIndex = 43;
             btexit.Text = "Quitter l'application";
             btexit.UseVisualStyleBackColor = false;
