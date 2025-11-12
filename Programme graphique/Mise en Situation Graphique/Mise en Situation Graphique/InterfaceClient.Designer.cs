@@ -48,13 +48,14 @@
             btaddclient.FlatStyle = FlatStyle.Flat;
             btaddclient.Font = new Font("Arial", 14F, FontStyle.Bold);
             btaddclient.ForeColor = Color.White;
-            btaddclient.Location = new Point(54, 57);
+            btaddclient.Location = new Point(47, 43);
             btaddclient.Margin = new Padding(2);
             btaddclient.Name = "btaddclient";
-            btaddclient.Size = new Size(180, 66);
+            btaddclient.Size = new Size(158, 50);
             btaddclient.TabIndex = 34;
             btaddclient.Text = "Ajouter un client";
             btaddclient.UseVisualStyleBackColor = false;
+            btaddclient.Click += btaddclient_Click;
             // 
             // btsearchclient
             // 
@@ -64,10 +65,10 @@
             btsearchclient.FlatStyle = FlatStyle.Flat;
             btsearchclient.Font = new Font("Arial", 14F, FontStyle.Bold);
             btsearchclient.ForeColor = Color.White;
-            btsearchclient.Location = new Point(287, 57);
+            btsearchclient.Location = new Point(251, 43);
             btsearchclient.Margin = new Padding(2);
             btsearchclient.Name = "btsearchclient";
-            btsearchclient.Size = new Size(179, 66);
+            btsearchclient.Size = new Size(157, 50);
             btsearchclient.TabIndex = 35;
             btsearchclient.Text = "Rechercher un client";
             btsearchclient.UseVisualStyleBackColor = false;
@@ -81,10 +82,10 @@
             btallsearch.FlatStyle = FlatStyle.Flat;
             btallsearch.Font = new Font("Arial", 14F, FontStyle.Bold);
             btallsearch.ForeColor = Color.White;
-            btallsearch.Location = new Point(514, 57);
+            btallsearch.Location = new Point(450, 43);
             btallsearch.Margin = new Padding(2);
             btallsearch.Name = "btallsearch";
-            btallsearch.Size = new Size(179, 66);
+            btallsearch.Size = new Size(157, 50);
             btallsearch.TabIndex = 36;
             btallsearch.Text = "Rechercher tous client";
             btallsearch.UseVisualStyleBackColor = false;
@@ -98,10 +99,10 @@
             btnbclient.FlatStyle = FlatStyle.Flat;
             btnbclient.Font = new Font("Arial", 14F, FontStyle.Bold);
             btnbclient.ForeColor = Color.White;
-            btnbclient.Location = new Point(736, 57);
+            btnbclient.Location = new Point(644, 43);
             btnbclient.Margin = new Padding(2);
             btnbclient.Name = "btnbclient";
-            btnbclient.Size = new Size(179, 66);
+            btnbclient.Size = new Size(157, 50);
             btnbclient.TabIndex = 37;
             btnbclient.Text = "Nombre de Client";
             btnbclient.UseVisualStyleBackColor = false;
@@ -115,10 +116,10 @@
             bteditclient.FlatStyle = FlatStyle.Flat;
             bteditclient.Font = new Font("Arial", 14F, FontStyle.Bold);
             bteditclient.ForeColor = Color.White;
-            bteditclient.Location = new Point(967, 57);
+            bteditclient.Location = new Point(846, 43);
             bteditclient.Margin = new Padding(2);
             bteditclient.Name = "bteditclient";
-            bteditclient.Size = new Size(179, 66);
+            bteditclient.Size = new Size(157, 50);
             bteditclient.TabIndex = 38;
             bteditclient.Text = "Modifier un client";
             bteditclient.UseVisualStyleBackColor = false;
@@ -132,10 +133,10 @@
             btdeleteclient.FlatStyle = FlatStyle.Flat;
             btdeleteclient.Font = new Font("Arial", 14F, FontStyle.Bold);
             btdeleteclient.ForeColor = Color.White;
-            btdeleteclient.Location = new Point(54, 173);
+            btdeleteclient.Location = new Point(47, 130);
             btdeleteclient.Margin = new Padding(2);
             btdeleteclient.Name = "btdeleteclient";
-            btdeleteclient.Size = new Size(180, 66);
+            btdeleteclient.Size = new Size(158, 50);
             btdeleteclient.TabIndex = 39;
             btdeleteclient.Text = "Supprimer un client";
             btdeleteclient.UseVisualStyleBackColor = false;
@@ -149,10 +150,10 @@
             btdeletesupprimer.FlatStyle = FlatStyle.Flat;
             btdeletesupprimer.Font = new Font("Arial", 14F, FontStyle.Bold);
             btdeletesupprimer.ForeColor = Color.White;
-            btdeletesupprimer.Location = new Point(287, 173);
+            btdeletesupprimer.Location = new Point(251, 130);
             btdeletesupprimer.Margin = new Padding(2);
             btdeletesupprimer.Name = "btdeletesupprimer";
-            btdeletesupprimer.Size = new Size(180, 66);
+            btdeletesupprimer.Size = new Size(158, 50);
             btdeletesupprimer.TabIndex = 40;
             btdeletesupprimer.Text = "Supprimer un client";
             btdeletesupprimer.UseVisualStyleBackColor = false;
@@ -166,10 +167,10 @@
             btsearchdeleteclient.FlatStyle = FlatStyle.Flat;
             btsearchdeleteclient.Font = new Font("Arial", 12.2000008F, FontStyle.Bold);
             btsearchdeleteclient.ForeColor = Color.White;
-            btsearchdeleteclient.Location = new Point(514, 173);
+            btsearchdeleteclient.Location = new Point(450, 130);
             btsearchdeleteclient.Margin = new Padding(2);
             btsearchdeleteclient.Name = "btsearchdeleteclient";
-            btsearchdeleteclient.Size = new Size(194, 66);
+            btsearchdeleteclient.Size = new Size(170, 50);
             btsearchdeleteclient.TabIndex = 41;
             btsearchdeleteclient.Text = "Afficher un client supprimer";
             btsearchdeleteclient.UseVisualStyleBackColor = false;
@@ -183,10 +184,10 @@
             btcompresse.FlatStyle = FlatStyle.Flat;
             btcompresse.Font = new Font("Arial", 14F, FontStyle.Bold);
             btcompresse.ForeColor = Color.White;
-            btcompresse.Location = new Point(736, 173);
+            btcompresse.Location = new Point(644, 130);
             btcompresse.Margin = new Padding(2);
             btcompresse.Name = "btcompresse";
-            btcompresse.Size = new Size(180, 66);
+            btcompresse.Size = new Size(158, 50);
             btcompresse.TabIndex = 42;
             btcompresse.Text = "Compresser le fichier";
             btcompresse.UseVisualStyleBackColor = false;
@@ -200,10 +201,10 @@
             btexit.FlatStyle = FlatStyle.Flat;
             btexit.Font = new Font("Arial", 14F, FontStyle.Bold);
             btexit.ForeColor = Color.White;
-            btexit.Location = new Point(967, 173);
+            btexit.Location = new Point(846, 130);
             btexit.Margin = new Padding(2);
             btexit.Name = "btexit";
-            btexit.Size = new Size(180, 66);
+            btexit.Size = new Size(158, 50);
             btexit.TabIndex = 43;
             btexit.Text = "Quitter l'application";
             btexit.UseVisualStyleBackColor = false;
@@ -211,9 +212,9 @@
             // 
             // InterfaceClient
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1275, 641);
+            ClientSize = new Size(1116, 481);
             Controls.Add(btexit);
             Controls.Add(btcompresse);
             Controls.Add(btsearchdeleteclient);
@@ -224,6 +225,7 @@
             Controls.Add(btallsearch);
             Controls.Add(btsearchclient);
             Controls.Add(btaddclient);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "InterfaceClient";
             Text = "Form1";
             ResumeLayout(false);
