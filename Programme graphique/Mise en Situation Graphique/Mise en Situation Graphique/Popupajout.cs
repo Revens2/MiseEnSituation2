@@ -126,7 +126,7 @@ namespace Mise_en_Situation_Graphique
                     }
                 }
             }
-
+            this.Close();
         }
     }
 }

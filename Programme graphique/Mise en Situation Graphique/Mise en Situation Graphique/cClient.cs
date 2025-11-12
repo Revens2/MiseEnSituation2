@@ -36,48 +36,8 @@ namespace Mise_en_Situation_Graphique
 
         public void RechercheClient()
         {
-
-            string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
-            string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
-            FileInfo fi = new FileInfo(chemindufichier);
-            if (fi.Length == 0)
-            {
-                Console.WriteLine("Le fichier est vide, impossible de rechercher un client.");
-                Console.Read();
-                return;
-            }
-
-            Console.Write("Nom a rechercher : ");
-            string cible = Console.ReadLine();
-            cible = cible.ToUpper();
-
-            bool found = false;
-            using (FileStream fs = new FileStream(chemindufichier, FileMode.Open, FileAccess.Read))
-            using (BinaryReader reader = new BinaryReader(fs))
-            {
-                while (fs.Position < fs.Length)
-                {
-                    c.Id = reader.ReadInt32();
-                    c.nom = reader.ReadString();
-                    c.prenom = reader.ReadString();
-                    c.num = reader.ReadString();
-
-                    if (string.Equals(c.nom, cible, StringComparison.OrdinalIgnoreCase))
-                    {
-                        if (!c.nom.StartsWith("*"))
-                        {
-                            Console.WriteLine($"{c.nom} {c.prenom}");
-                            found = true;
-                        }
-                    }
-                }
-            }
-            if (!found)
-            {
-                Console.WriteLine("Aucun client trouvé avec ce nom.");
-            }
-            Console.WriteLine("Appuer sur une touche pour continuer :");
-            Console.Read();
+            popuprecherche popup = new popuprecherche();
+            popup.ShowDialog();
 
         }
         public void RecherchetousClient()
@@ -520,7 +480,9 @@ namespace Mise_en_Situation_Graphique
         }
         public void QUITTER_ACTION()
         {
-            Application.Exit();
+            popupexit popup = new popupexit();
+            popup.ShowDialog();
+            
         }
         
     }
