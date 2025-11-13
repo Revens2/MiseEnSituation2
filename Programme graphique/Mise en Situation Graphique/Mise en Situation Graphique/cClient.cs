@@ -43,32 +43,8 @@ namespace Mise_en_Situation_Graphique
         public void RecherchetousClient()
         {
 
-            string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
-            string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
-            FileInfo fi = new FileInfo(chemindufichier);
-            if (fi.Length == 0)
-            {
-                Console.WriteLine("Le fichier est vide, impossible d'afficher tout les clients.");
-                Console.Read();
-                return;
-            }
-            using (FileStream fs = new FileStream(chemindufichier, FileMode.Open, FileAccess.Read))
-            using (BinaryReader reader = new BinaryReader(fs))
-            {
-                while (fs.Position < fs.Length)
-                {
-                    c.Id = reader.ReadInt32();
-                    c.nom = reader.ReadString();
-                    c.prenom = reader.ReadString();
-                    c.num = reader.ReadString();
-                    if (!c.nom.StartsWith("*"))
-                    {
-                        Console.WriteLine($"{c.Id} {c.nom} {c.prenom} {c.num}");
-                    }
-                }
-            }
-            Console.WriteLine("Appuer sur une touche pour continuer :");
-            Console.Read();
+            popuplistclients popup = new popuplistclients();
+            popup.ShowDialog();
 
         }
         public void NombreClient()
@@ -371,7 +347,8 @@ namespace Mise_en_Situation_Graphique
         public void RechercheClientSupprimé()
         {
 
-            
+            popuplistsup popup = new popuplistsup();
+            popup.ShowDialog();
 
         }
 
