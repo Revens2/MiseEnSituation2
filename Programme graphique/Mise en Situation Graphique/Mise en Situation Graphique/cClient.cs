@@ -73,37 +73,9 @@ namespace Mise_en_Situation_Graphique
         }
         public void NombreClient()
         {
-
-            int numberclient = 0;
-            string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
-            string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
-            FileInfo fi = new FileInfo(chemindufichier);
-            if (fi.Length == 0)
-            {
-                Console.WriteLine("Le fichier est vide, impossible d'afficher le nombre de client.");
-                Console.Read();
-                return;
-            }
-            using (FileStream fs = new FileStream(chemindufichier, FileMode.Open, FileAccess.Read))
-            using (BinaryReader reader = new BinaryReader(fs))
-            {
-                while (fs.Position < fs.Length)
-                {
-                    c.Id = reader.ReadInt32();
-                    c.nom = reader.ReadString();
-                    c.prenom = reader.ReadString();
-                    c.num = reader.ReadString();
-                    if (!c.nom.StartsWith("*"))
-                    {
-                        numberclient++;
-                    }
-
-
-                }
-            }
-            Console.WriteLine($"Le nombre de client est de : {numberclient}");
-            Console.WriteLine($"Appuer sur une touche pour continuer");
-            Console.Read();
+            popupnbclient popup = new popupnbclient();
+            popup.ShowDialog();
+            
 
         }
 
@@ -399,84 +371,15 @@ namespace Mise_en_Situation_Graphique
         public void RechercheClientSupprimé()
         {
 
-            string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
-            string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
-            FileInfo fi = new FileInfo(chemindufichier);
-            if (fi.Length == 0)
-            {
-                Console.WriteLine("Le fichier est vide, impossible de rechercher un client supprimé.");
-                Console.Read();
-                return;
-            }
-            using (FileStream fs = new FileStream(chemindufichier, FileMode.Open, FileAccess.Read))
-            using (BinaryReader reader = new BinaryReader(fs))
-            {
-                while (fs.Position < fs.Length)
-                {
-                    c.Id = reader.ReadInt32();
-                    c.nom = reader.ReadString();
-                    c.prenom = reader.ReadString();
-                    c.num = reader.ReadString();
-                    if (c.nom.StartsWith("*"))
-                    {
-                        Console.WriteLine($"{c.Id} {c.nom} {c.prenom} {c.num}");
-                    }
-                }
-            }
-            Console.WriteLine("Appuer sur une touche pour continuer :");
-            Console.Read();
+            
 
         }
 
         public void CompresseFile()
         {
-
-            string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
-            string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
-            string chemindufichiertemporaire = Path.Combine(repertoireprojet, "clientstempo.dat");
-            FileInfo fi = new FileInfo(chemindufichier);
-            if (fi.Length == 0)
-            {
-                Console.WriteLine("Le fichier est vide, impossible de compresser le fichier.");
-                Console.Read();
-                return;
-            }
-            using (FileStream fs = new FileStream(chemindufichier, FileMode.Open, FileAccess.Read, FileShare.Read))
-            using (FileStream fsmodifier = new FileStream(chemindufichiertemporaire, FileMode.Create, FileAccess.Write, FileShare.None))
-            using (BinaryReader reader = new BinaryReader(fs))
-            using (BinaryWriter WriterBin = new BinaryWriter(fsmodifier))
-            {
-                while (fs.Position < fs.Length)
-                {
-                    c.Id = reader.ReadInt32();
-                    c.nom = reader.ReadString();
-                    c.prenom = reader.ReadString();
-                    c.num = reader.ReadString();
-                    if (!c.nom.StartsWith("*"))
-                    {
-                        WriterBin.Write(c.Id);
-                        c.Majuscule();
-                        WriterBin.Write(c.nom);
-                        c.FirstMajuscule();
-                        WriterBin.Write(c.prenom);
-                        WriterBin.Write(c.num);
-
-
-                    }
-                }
-            }
-
-            using (var fs2 = new FileStream(chemindufichier, FileMode.Open, FileAccess.Write, FileShare.None))
-            using (var fsmodifier2 = new FileStream(chemindufichiertemporaire, FileMode.Open, FileAccess.Read, FileShare.Read))
-
-            {
-                fs2.SetLength(0);
-                fsmodifier2.CopyTo(fs2);
-            }
-            Console.WriteLine("Fichier compressé avec succès.");
-            Console.WriteLine("Appuer sur une touche pour continuer :");
-            Console.Read();
-
+            popupcompresse popup = new popupcompresse();
+            popup.ShowDialog();
+            
         }
         public void QUITTER_ACTION()
         {

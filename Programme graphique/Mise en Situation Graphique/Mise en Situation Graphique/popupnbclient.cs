@@ -10,32 +10,22 @@ using System.Windows.Forms;
 
 namespace Mise_en_Situation_Graphique
 {
-    public partial class popuprecherche : Form
+    public partial class popupnbclient : Form
     {
-        public popuprecherche()
+        public popupnbclient()
         {
             InitializeComponent();
-            btexit.Visible = false;
-        }
-
-        private void btok_Click(object sender, EventArgs e)
-        {
-
             Client c = new Client();
-
+            int numberclient = 0;
             string repertoireprojet = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
             string chemindufichier = Path.Combine(repertoireprojet, "clients.dat");
             FileInfo fi = new FileInfo(chemindufichier);
             if (fi.Length == 0)
             {
-                lbresult.Text = "Le fichier est vide, impossible de rechercher un client.";
+                Console.WriteLine("Le fichier est vide, impossible d'afficher le nombre de client.");
+                Console.Read();
                 return;
             }
-
-            string cible = tbsearch.Text;
-            cible = cible.ToUpper();
-
-            bool found = false;
             using (FileStream fs = new FileStream(chemindufichier, FileMode.Open, FileAccess.Read))
             using (BinaryReader reader = new BinaryReader(fs))
             {
@@ -45,26 +35,18 @@ namespace Mise_en_Situation_Graphique
                     c.nom = reader.ReadString();
                     c.prenom = reader.ReadString();
                     c.num = reader.ReadString();
-
-                    if (string.Equals(c.nom, cible, StringComparison.OrdinalIgnoreCase))
+                    if (!c.nom.StartsWith("*"))
                     {
-                        if (!c.nom.StartsWith("*"))
-                        {
-                            lbresult.Text = $"{c.nom} {c.prenom} {c.num}";
-                            found = true;
-
-                        }
+                        numberclient++;
                     }
+
+
                 }
             }
-            if (!found)
-            {
-                lbresult.Text = "Aucun client trouvé avec ce nom.";
-            }
-            btexit.Visible = true;
+            lbnb.Text = Convert.ToString(numberclient);
         }
 
-        private void btexit_Click(object sender, EventArgs e)
+        private void btretour_Click(object sender, EventArgs e)
         {
             this.Close();
         }

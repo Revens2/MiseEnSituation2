@@ -87,7 +87,7 @@
             btallsearch.Name = "btallsearch";
             btallsearch.Size = new Size(157, 57);
             btallsearch.TabIndex = 36;
-            btallsearch.Text = "Rechercher tous client";
+            btallsearch.Text = "Afficher tous les clients";
             btallsearch.UseVisualStyleBackColor = false;
             btallsearch.Click += btallsearch_Click;
             // 
@@ -155,7 +155,7 @@
             btdeletesupprimer.Name = "btdeletesupprimer";
             btdeletesupprimer.Size = new Size(158, 56);
             btdeletesupprimer.TabIndex = 40;
-            btdeletesupprimer.Text = "Supprimer un client";
+            btdeletesupprimer.Text = "recuperer un client ";
             btdeletesupprimer.UseVisualStyleBackColor = false;
             btdeletesupprimer.Click += btdeletesupprimer_Click;
             // 
