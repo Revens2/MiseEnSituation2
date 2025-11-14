@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Mise_en_Situation_Graphique
 {
-    public partial class popuplistsup: Form
+    public partial class popuplistsup : Form
     {
         public popuplistsup()
         {
@@ -61,6 +61,11 @@ namespace Mise_en_Situation_Graphique
                     }
                 }
             }
+        }
+
+        private void btexit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

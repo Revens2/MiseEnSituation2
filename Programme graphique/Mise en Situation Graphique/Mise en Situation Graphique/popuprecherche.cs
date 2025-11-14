@@ -15,7 +15,6 @@ namespace Mise_en_Situation_Graphique
         public popuprecherche()
         {
             InitializeComponent();
-            btexit.Visible = false;
         }
 
         private void btok_Click(object sender, EventArgs e)
@@ -61,7 +60,7 @@ namespace Mise_en_Situation_Graphique
             {
                 lbresult.Text = "Aucun client trouvé avec ce nom.";
             }
-            btexit.Visible = true;
+            
         }
 
         private void btexit_Click(object sender, EventArgs e)

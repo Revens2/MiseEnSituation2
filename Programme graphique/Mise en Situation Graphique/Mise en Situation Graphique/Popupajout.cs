@@ -114,7 +114,7 @@ namespace Mise_en_Situation_Graphique
                         {
                             WriterBin.Write(id + 1);
                             c.nom = tbnom.Text;
-                            
+
                             c.Majuscule();
                             WriterBin.Write(c.nom);
                             c.prenom = tbprenom.Text;
@@ -126,6 +126,11 @@ namespace Mise_en_Situation_Graphique
                     }
                 }
             }
+            this.Close();
+        }
+
+        private void btreturn_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

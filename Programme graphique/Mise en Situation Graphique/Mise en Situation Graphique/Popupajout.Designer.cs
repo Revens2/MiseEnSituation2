@@ -36,6 +36,7 @@
             tbnum = new TextBox();
             lnnum = new Label();
             btsave = new Button();
+            btreturn = new Button();
             SuspendLayout();
             // 
             // lbtitleaddclient
@@ -98,7 +99,7 @@
             // 
             // btsave
             // 
-            btsave.Location = new Point(349, 201);
+            btsave.Location = new Point(441, 202);
             btsave.Name = "btsave";
             btsave.Size = new Size(75, 23);
             btsave.TabIndex = 7;
@@ -106,11 +107,22 @@
             btsave.UseVisualStyleBackColor = true;
             btsave.Click += btsave_Click;
             // 
+            // btreturn
+            // 
+            btreturn.Location = new Point(276, 202);
+            btreturn.Name = "btreturn";
+            btreturn.Size = new Size(75, 23);
+            btreturn.TabIndex = 8;
+            btreturn.Text = "Retour";
+            btreturn.UseVisualStyleBackColor = true;
+            btreturn.Click += btreturn_Click;
+            // 
             // Popupajout
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btreturn);
             Controls.Add(btsave);
             Controls.Add(tbnum);
             Controls.Add(lnnum);
@@ -135,5 +147,6 @@
         private TextBox tbnum;
         private Label lnnum;
         private Button btsave;
+        private Button btreturn;
     }
 }

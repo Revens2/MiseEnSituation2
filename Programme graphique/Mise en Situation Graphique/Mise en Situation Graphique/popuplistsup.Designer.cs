@@ -36,39 +36,43 @@
             // 
             // btexit
             // 
-            btexit.Location = new Point(70, 347);
+            btexit.Location = new Point(61, 260);
+            btexit.Margin = new Padding(3, 2, 3, 2);
             btexit.Name = "btexit";
-            btexit.Size = new Size(94, 29);
+            btexit.Size = new Size(82, 22);
             btexit.TabIndex = 8;
             btexit.Text = "retour";
             btexit.UseVisualStyleBackColor = true;
+            btexit.Click += btexit_Click;
             // 
             // lbtitle
             // 
             lbtitle.AutoSize = true;
-            lbtitle.Location = new Point(70, 74);
+            lbtitle.Location = new Point(61, 56);
             lbtitle.Name = "lbtitle";
-            lbtitle.Size = new Size(195, 20);
+            lbtitle.Size = new Size(156, 15);
             lbtitle.TabIndex = 7;
             lbtitle.Text = "Liste des supprimés clients : ";
             // 
             // gvlist
             // 
             gvlist.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gvlist.Location = new Point(70, 122);
+            gvlist.Location = new Point(61, 92);
+            gvlist.Margin = new Padding(3, 2, 3, 2);
             gvlist.Name = "gvlist";
             gvlist.RowHeadersWidth = 51;
-            gvlist.Size = new Size(661, 188);
+            gvlist.Size = new Size(578, 141);
             gvlist.TabIndex = 6;
             // 
             // popuplistsup
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(btexit);
             Controls.Add(lbtitle);
             Controls.Add(gvlist);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "popuplistsup";
             Text = "popuplistsup";
             ((System.ComponentModel.ISupportInitialize)gvlist).EndInit();
