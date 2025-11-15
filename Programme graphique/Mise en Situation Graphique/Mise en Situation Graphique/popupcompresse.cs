@@ -60,6 +60,7 @@ namespace Mise_en_Situation_Graphique
                 fs2.SetLength(0);
                 fsmodifier2.CopyTo(fs2);
             }
+            this.Close();
 
         }
 
